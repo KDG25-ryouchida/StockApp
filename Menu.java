@@ -20,7 +20,7 @@ public class Menu {
 			if (choice == 1) {
 				registerItem();
 			} else if (choice == 2) {
-				System.out.println("一覧表示機能");
+				showListMenu();
 			} else if (choice == 3) {
 				System.out.println("更新機能");
 			} else if (choice == 4) {
@@ -29,12 +29,12 @@ public class Menu {
 		}
 	}
 
-	/// トップメニューを表示
+	/// メニューを表示
 	public void showMainMenu() {
 		System.out.println(" 1:登録 | 2:一覧 | 3:更新 | 4:削除 | 0:終了 ");
 	}
 
-	/// 新規登録
+	/// 新規登録メソッド　番号:1
 	public void registerItem() {
 		System.out.print("品名: ");
 		String name = scanner.nextLine();
@@ -52,4 +52,34 @@ public class Menu {
 
 		itemService.addItem(name, category, status, memo);
 	}
+
+	///一示表示メソッド 番号:2
+	public void showListMenu() {
+		System.out.println("一覧メニュー");
+		System.out.println("1:全件表示");
+		System.out.println("2:購入品レコメンド（残量少、なし）");
+		System.out.println("番号を入力してください: ");
+
+		int subChoice = scanner.nextInt();
+		scanner.nextLine();
+
+		if (subChoice == 1) {
+			showAll();
+		} else if (subChoice == 2) {
+			showRecommendItem();
+		}
+	}
+
+	// 全件表示の処理
+	public void showAll() {
+		System.out.println("在庫一覧");
+		itemService.getAllItems();
+	}
+
+	// レコメンド表示の処理
+	public void showRecommendItem() {
+		System.out.println("在庫切れリスト");
+		itemService.getRecommendItems();
+	}
+
 }
