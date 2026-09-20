@@ -22,4 +22,17 @@ public class ItemService {
 			}
 		}
 	}
+
+	///データの登録メソッド
+	public void addItem(String name, String category, int status, String memo) {
+		///新しいアイテムの作成、リストへの追加
+		Item newItem = new Item(nextId, name, category, status, memo);
+		itemList.add(newItem);
+		System.out.println("ID" + nextId + name + "をストックに登録しました。");
+
+		///次のアイテム用のID番号
+		nextId++;
+
+	}
+
 }
