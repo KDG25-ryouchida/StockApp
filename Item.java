@@ -17,7 +17,7 @@ public class Item {
 		this.memo = memo;
 	}
 
-	///残量を、文字で返すメソッド
+	///残量を文字で返すメソッド
 	public String getStatusLabel() {
 		if (status == 2) {
 			return "十分あり";
