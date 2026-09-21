@@ -73,13 +73,13 @@ public class Menu {
 	// 全件表示の処理
 	public void showAll() {
 		System.out.println("在庫一覧");
-		itemService.getAllItems();
+		itemService.showAll();
 	}
 
 	// レコメンド表示の処理
 	public void showRecommendItem() {
 		System.out.println("在庫切れリスト");
-		itemService.getRecommendItems();
+		itemService.showRecommendItem();
 	}
 
 }
