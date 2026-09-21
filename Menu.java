@@ -22,7 +22,7 @@ public class Menu {
 			} else if (choice == 2) {
 				showListMenu();
 			} else if (choice == 3) {
-				System.out.println("更新機能");
+				updateItemStatus();
 			} else if (choice == 4) {
 				System.out.println("削除機能");
 			}
@@ -80,6 +80,19 @@ public class Menu {
 	public void showRecommendItem() {
 		System.out.println("在庫切れリスト");
 		itemService.showRecommendItem();
+	}
+
+	///ステータス更新メソッド　番号:3
+	public void updateItemStatus() {
+		System.out.println("ステータス更新");
+		System.out.println("更新したいストックのITを入力してください");
+		int id = scanner.nextInt();
+
+		System.out.print("新しい残量(0:なし, 1:残りわずか, 2:十分): ");
+		int newStatus = scanner.nextInt();
+		scanner.nextLine();
+
+		itemService.updateStatus(id, newStatus);
 	}
 
 }

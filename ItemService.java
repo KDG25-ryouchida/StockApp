@@ -8,7 +8,7 @@ public class ItemService {
 	private List<Item> itemList = new ArrayList<>();
 	private int nextId = 1;
 
-	///データの登録メソッド　番号:1
+	///データの登録機能　番号:1
 	public void addItem(String name, String category, int status, String memo) {
 		///新しいアイテムの作成、リストへの追加
 		Item newItem = new Item(nextId, name, category, status, memo);
@@ -20,8 +20,9 @@ public class ItemService {
 
 	}
 
-	///一覧表示　番号:2
-	///全件表示　番号:2-1
+	///一覧表示機能　番号:2
+
+	///全件表示機能　番号:2-1
 	public void showAll() {
 		if (itemList.isEmpty()) {
 			System.out.println("現在登録されているストックはありません");
@@ -49,9 +50,30 @@ public class ItemService {
 				found = true;
 			}
 		}
+		///レコメンドされた商品がない時
 		if (!found) {
 			System.out.println("現在、購入が必要なストックはありません。");
 
 		}
 	}
+
+	///ステータス更新機能 番号:3
+	public void updateStatus(int targetId, int newStatus) {
+		boolean found = false;
+
+		for (Item item : itemList) {
+			if (item.getId() == targetId) {
+				item.setStatus(newStatus);
+				System.out.println("ID: " + targetId + "の" + item.getName() + "の残量を更新しました。");
+				found = true;
+				break;
+			}
+		}
+		///入力された番号が見つからなかった時
+		if (!found) {
+			System.out.println("指定されたIDのストックは見つかりませんでした。");
+		}
+
+	}
+
 }
