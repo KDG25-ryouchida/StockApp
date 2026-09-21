@@ -73,7 +73,26 @@ public class ItemService {
 		if (!found) {
 			System.out.println("指定されたIDのストックは見つかりませんでした。");
 		}
-
 	}
 
+	///削除機能 番号:4
+	public void deleteItem(int targetId) {
+		Item itemToRemove = null;
+
+		for (Item item : itemList) {
+			if (item.getId() == targetId) {
+				itemToRemove = item;
+				break;
+			}
+		}
+
+		if (itemToRemove != null) {
+			itemList.remove(itemToRemove);
+			System.out.println("ID: " + targetId + "のストックを削除しました。");
+		}
+		///削除対象のIDが見つからない時
+		else {
+			System.out.println("指定されたIDのストックは見つかりませんでした。");
+		}
+	}
 }

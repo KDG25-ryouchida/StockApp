@@ -24,7 +24,7 @@ public class Menu {
 			} else if (choice == 3) {
 				updateItemStatus();
 			} else if (choice == 4) {
-				System.out.println("削除機能");
+				removeItem();
 			}
 		}
 	}
@@ -95,4 +95,13 @@ public class Menu {
 		itemService.updateStatus(id, newStatus);
 	}
 
+	/// 削除メソッド 番号:4
+	public void removeItem() {
+		System.out.println("ストック削除");
+		System.out.print("削除したいストックのIDを入力してください: ");
+		int id = scanner.nextInt();
+		scanner.nextLine();
+
+		itemService.deleteItem(id);
+	}
 }
