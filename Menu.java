@@ -6,25 +6,33 @@ public class Menu {
 	private Scanner scanner = new Scanner(System.in);
 	private ItemService itemService = new ItemService();
 
-	///ループ処理　番号入力に応じて各操作を呼び出す
+	///ループ処理　番号入力に応じて各操作を呼び出す(数字以外は弾く)
 	public void start() {
 		int choice = -1;
 
 		while (choice != 0) {
 			showMainMenu();
-
 			System.out.print("番号を入力してください: ");
-			choice = scanner.nextInt();
-			scanner.nextLine();
 
-			if (choice == 1) {
-				registerItem();
-			} else if (choice == 2) {
-				showListMenu();
-			} else if (choice == 3) {
-				updateItemStatus();
-			} else if (choice == 4) {
-				removeItem();
+			///数字か文字列かの判別
+			if (scanner.hasNextInt()) {
+				choice = scanner.nextInt();
+				scanner.nextLine();
+
+				if (choice == 1) {
+					registerItem();
+				} else if (choice == 2) {
+					showListMenu();
+				} else if (choice == 3) {
+					updateItem();
+				} else if (choice == 4) {
+					removeItem();
+				}
+			}
+			///数字でなかった場合
+			else {
+				System.out.println("メニューにある半角数字を入力してください。");
+				scanner.nextLine();
 			}
 		}
 	}
@@ -83,16 +91,24 @@ public class Menu {
 	}
 
 	///ステータス更新メソッド　番号:3
-	public void updateItemStatus() {
-		System.out.println("ステータス更新");
-		System.out.println("更新したいストックのITを入力してください");
+	public void updateItem() {
+		System.out.println("ストック更新");
+		System.out.println("更新したいストックのIDを入力してください: ");
 		int id = scanner.nextInt();
+		scanner.nextLine();
+
+		System.out.print("新しい品名: ");
+		String newName = scanner.nextLine();
 
 		System.out.print("新しい残量(0:なし, 1:残りわずか, 2:十分): ");
 		int newStatus = scanner.nextInt();
 		scanner.nextLine();
 
-		itemService.updateStatus(id, newStatus);
+		System.out.print("新しいメモ: ");
+		String newMemo = scanner.nextLine();
+
+		// ItemServiceの新しい更新メソッドに渡す
+		itemService.updateItem(id, newName, newStatus, newMemo);
 	}
 
 	/// 削除メソッド 番号:4

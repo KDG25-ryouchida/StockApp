@@ -17,7 +17,6 @@ public class ItemService {
 
 		///次のアイテム用のID番号
 		nextId++;
-
 	}
 
 	///一覧表示機能　番号:2
@@ -30,7 +29,7 @@ public class ItemService {
 			System.out.println("ストック一覧");
 			for (Item item : itemList) {
 				System.out.println("ID: " + item.getId() + "名前: " + item.getName() + "カテゴリ: " + item.getCategory()
-						+ "残量: " + item.getStatus() + "メモ: " + item.getMemo());
+						+ "残量: " + item.getStatusLabel() + "メモ: " + item.getMemo());
 			}
 		}
 	}
@@ -46,7 +45,7 @@ public class ItemService {
 		System.out.println("購入品リスト");
 		for (Item item : itemList) {
 			if ((item.isRecommended())) {
-				System.out.println("ID: " + item.getId() + "名前: " + item.getName() + "残量: " + item.getStatus());
+				System.out.println("ID: " + item.getId() + "名前: " + item.getName() + "残量: " + item.getStatusLabel());
 				found = true;
 			}
 		}
@@ -58,13 +57,16 @@ public class ItemService {
 	}
 
 	///ステータス更新機能 番号:3
-	public void updateStatus(int targetId, int newStatus) {
+	public void updateItem(int targetId, String newName, int newStatus, String newMemo) {
 		boolean found = false;
 
 		for (Item item : itemList) {
 			if (item.getId() == targetId) {
+				item.setName(newName);
 				item.setStatus(newStatus);
-				System.out.println("ID: " + targetId + "の" + item.getName() + "の残量を更新しました。");
+				item.setMemo(newMemo);
+
+				System.out.println("ID: " + targetId + " のストック情報を更新しました。");
 				found = true;
 				break;
 			}
