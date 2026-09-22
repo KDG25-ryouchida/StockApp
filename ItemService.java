@@ -14,8 +14,15 @@ public class ItemService {
 		Item newItem = new Item(nextId, name, category, status, memo);
 		itemList.add(newItem);
 		System.out.println("ID" + nextId + name + "をストックに登録しました。");
-
 		///次のアイテム用のID番号
+		nextId++;
+	}
+
+	///【追加】期限ありデータの登録機能（賞味期限、消費期限など）
+	public void addFoodItem(String name, String category, int status, String memo, String expirationDate) {
+		FoodItem newFoodItem = new FoodItem(nextId, name, category, status, memo, expirationDate);
+		itemList.add(newFoodItem);
+		System.out.println("ID" + nextId + " " + name + "を食品ストックに登録しました。");
 		nextId++;
 	}
 
@@ -28,8 +35,7 @@ public class ItemService {
 		} else {
 			System.out.println("ストック一覧");
 			for (Item item : itemList) {
-				System.out.println("ID: " + item.getId() + "名前: " + item.getName() + "カテゴリ: " + item.getCategory()
-						+ "残量: " + item.getStatusLabel() + "メモ: " + item.getMemo());
+				System.out.println(item.getItemInfo());
 			}
 		}
 	}
