@@ -77,4 +77,8 @@ public class Item {
 		this.memo = memo;
 	}
 
+	public String getItemInfo() {
+		return "ID:" + id + " | 品名:" + name + " | カテゴリ:" + category + " | 状態:" + getStatusLabel() + " | メモ:" + memo;
+	}
+
 }
