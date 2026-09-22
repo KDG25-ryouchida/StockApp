@@ -44,6 +44,16 @@ public class Menu {
 
 	/// 新規登録メソッド　番号:1
 	public void registerItem() {
+		///日用品か期限あり商品かを聞く
+		System.out.print("登録する種類を選んでください。(1:日用品 2:期限ありの商品（賞味期限など)): ");
+		int type = 1;
+		if (scanner.hasNextInt()) {
+			type = scanner.nextInt();
+			scanner.nextLine();
+		} else {
+			scanner.nextLine();
+		}
+
 		System.out.print("品名: ");
 		String name = scanner.nextLine();
 
@@ -58,7 +68,14 @@ public class Menu {
 
 		String memo = scanner.nextLine();
 
-		itemService.addItem(name, category, status, memo);
+		///期限あり商品を選んだ場合、期限の確認も行う
+		if (type == 2) {
+			System.out.print("期限 (例: 2026/09/25): ");
+			String expirationDate = scanner.nextLine();
+			itemService.addFoodItem(name, category, status, memo, expirationDate);
+		} else {
+			itemService.addItem(name, category, status, memo);
+		}
 	}
 
 	///一示表示メソッド 番号:2
